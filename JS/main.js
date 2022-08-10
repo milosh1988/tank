@@ -290,24 +290,24 @@ function ClassBoom(car) {
 }
 
 function playAudio() {
-    var audio = new Audio("/Sound/shutting.mp3");
+    var audio = new Audio("Sound/shutting.mp3");
     audio.play();
 }
 
 
-function playAudioDeth(car) {
-    var audio = new Audio("/Sound/deth.wav");
+function playAudioDeth() {
+    var audio = new Audio("Sound/deth.wav");
 
     audio.play();
 }
 
 function playAudioBrick() {
-    var audio = new Audio("/Sound/brick.wav");
+    var audio = new Audio("Sound/brick.wav");
 
     audio.play();
 }
 function playAudioMetal() {
-    var audio = new Audio("/Sound/metal.wav");
+    var audio = new Audio("Sound/metal.wav");
 
     audio.play();
 }
