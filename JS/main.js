@@ -469,7 +469,7 @@ function ClassTank() {
 
 
             if (life <= 0) {
-                alert("Game over!")
+                gameOver()
                 return
 
 
@@ -754,7 +754,7 @@ document.addEventListener('click', function () {
 });
 
 function loop() {
-    // Very simple and naive game loop
+
     update();
     render();
     requestAnimationFrame(loop);
@@ -1012,3 +1012,38 @@ function isSomethingOverlapBrick(something) {
 //0     1     0
 //1     1     1
 /////////////////// 
+
+function startGame() {
+    let startDiv = document.getElementById("start");
+    let gameCanvas = document.getElementById("canvas");
+    let gameOver = document.getElementById("game-over");
+    startDiv.style.display = "none";
+    gameCanvas.style.display = "block";
+    gameOver.style.display = "none";
+    start();
+}
+function gameOver() {
+    let startDiv = document.getElementById("start");
+    let gameCanvas = document.getElementById("canvas");
+    let gameOver = document.getElementById("game-over");
+    startDiv.style.display = "none";
+    gameCanvas.style.display = "none";
+    gameOver.style.display = "block";
+
+    car.init.reset();
+    tank.init.reset();
+    player2.reset();
+
+    clearInterval(sprites);
+}
+function launchIfReady() {
+    resourcesToLoad--;
+    if (resourcesToLoad == 0) {
+        let startDiv = document.getElementById("start");
+        let gameCanvas = document.getElementById("canvas");
+        let gameOver = document.getElementById("game-over");
+        startDiv.style.display = "block";
+        gameCanvas.style.display = "none";
+        gameOver.style.display = "none";
+    }
+}

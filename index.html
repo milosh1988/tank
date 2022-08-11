@@ -29,10 +29,16 @@
      
     
   
-    <canvas width="700" height="700">
-    </canvas>
+    <canvas width="700" height="700" id = "canvas" style="display:none;"></canvas>
+    <div id="start" style="display:block">
+        <a href="#" onclick="startGame()">Start Game</a>
+    </div>
+    <div id="game-over" style="display:none">
+        <h1>Game Over</h1>
+        <a href="#" onclick="startGame()">Start Game</a>
+    </div>
     
-    <div class="tick pepa" >Click on the canvas below, or press spacebar to shut</div>
+    <div class="tick pepa" >Click on the canvas below, or press spacebar to shut, P for pause</div>
         
     
 
