@@ -377,12 +377,12 @@ function ClassCar() {
         }
 
         //Da ne izlazi iz okvira :D
-        if (this.y > height) {
+        if (this.y > height - 25) {
             this.sy = -1;
             this.direction = 0;
         }
 
-        if (this.x > width) {
+        if (this.x > width - 25) {
             this.sx = -1
             this.direction = -90;
         }
@@ -618,53 +618,54 @@ function ClassBullet() {
 var tank = new ClassTank();
 tank.init();
 
+var gidSize = 50;
 
-var bricks = [{ x: 150, y: 50 }, { x: 200, y: 50 }, { x: 250, y: 50 }, { x: 300, y: 50 }, { x: 350, y: 50 },
-{ x: 50, y: 100 }, { x: 250, y: 100 }, { x: 350, y: 100 },
-{ x: 50, y: 150 }, { x: 250, y: 150 }, { x: 350, y: 150 },
-{ x: 50, y: 200 }, { x: 100, y: 200 }, { x: 200, y: 200 }, { x: 250, y: 200 }, { x: 350, y: 200 },
-{ x: 50, y: 250 }, { x: 100, y: 250 }, { x: 350, y: 250 },
-{ x: 50, y: 300 }, { x: 100, y: 300 }, { x: 200, y: 300 }, { x: 250, y: 300 }, { x: 350, y: 300 },
-{ x: 50, y: 350 }, { x: 100, y: 350 }, { x: 200, y: 350 }, { x: 250, y: 350 }, { x: 300, y: 350 }, { x: 350, y: 350 },
-];
-for (var i = 0; i < bricks.length; i++) {
-    var brickpos = bricks[i];
-    var brick = new ClassBrick(brickpos.x, brickpos.y);
-    brick.init();
+var map =
+    [[0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [5, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1],
+    [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1],
+    [1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1],
+    [1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1],
+    [1, 1, 1, 5, 5, 5, 5, 0, 0, 0, 0, 0, 1, 1],
+    [1, 0, 0, 0, 0, 4, 3, 3, 4, 0, 0, 0, 1, 1],
+    [1, 1, 1, 1, 0, 2, 3, 1, 2, 0, 1, 1, 1, 1],
+    [1, 1, 1, 1, 0, 2, 4, 2, 2, 0, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1],
+    [1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1],
+    [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    ]
+
+function createElement(x, y, element) {
+    (new element(x, y)).init()
 }
-
-var metals = [{ x: 0, y: 50 }, { x: 100, y: 50 },
-];
-for (var i = 0; i < metals.length; i++) {
-    var metalpos = metals[i];
-    var metal = new ClassMetal(metalpos.x, metalpos.y);
-    metal.init();
+var loads = [];
+map.forEach(function (e, iy) {
+    e.forEach(function (ee, ix) {
+        if (ee == 0) {
+            //createBrick(ix * gidSize, iy * gidSize, './ground64/ground.png');
+        }
+        if (ee == 1) {
+            createElement(ix * gidSize, iy * gidSize, ClassBrick);
+        }
+        if (ee == 2) {
+            createElement(ix * gidSize, iy * gidSize, ClassBush);
+        }
+        if (ee == 3) {
+            createElement(ix * gidSize, iy * gidSize, ClassWater);
+        }
+        if (ee == 4) {
+            createElement(ix * gidSize, iy * gidSize, ClassLoad);
+            loads.push({ x: ix * gidSize, y: iy * gidSize })
+        }
+        if (ee == 5) {
+            createElement(ix * gidSize, iy * gidSize, ClassMetal);
+        }
+    }
+    )
 }
-
-var bushs = [{ x: 50, y: 0 }, { x: 100, y: 150 },
-];
-for (var i = 0; i < bushs.length; i++) {
-    var bushpos = bushs[i];
-    var bush = new ClassBush(bushpos.x, bushpos.y);
-    bush.init();
-}
-
-var waters = [{ x: 150, y: 150 }, { x: 100, y: 150 },
-];
-for (var i = 0; i < waters.length; i++) {
-    var waterpos = waters[i];
-    var water = new ClassWater(waterpos.x, waterpos.y);
-    water.init();
-}
-
-var loads = [{ x: 300, y: 300 }, { x: 0, y: 300 }, { x: 150, y: 300 }];
-
-for (var i = 0; i < loads.length; i++) {
-    var loadpos = loads[i];
-    var load = new ClassLoad(loadpos.x, loadpos.y);
-    load.init();
-}
-
+)
 
 var newCar = function () {
     if (enemies <= 0) {
@@ -694,13 +695,55 @@ function createCarBullet(car) {
     bulletCar.init();
 
 }
+window.addEventListener('keydown', (e) => {
 
+    e.preventDefault();
+
+});
 document.addEventListener('keyup', function (event) {
     // If space bar is pressed
-    if (event.keyCode == 32) {
+    if (event.key == " ") {
         createBullet();
     }
+    switch (event.key) {
+        case 'ArrowLeft':
+            tank.setSpeed(-10, 0);
+            break;
+        case 'ArrowRight':
+            tank.setSpeed(10, 0);
+            break;
+        case 'ArrowUp':
+            tank.setSpeed(0, -10);
+            break;
+        case 'ArrowDown':
+            tank.setSpeed(0, 10);
+            break;
+        default:
+    }
+    switch (event.key) {
+        case 'ArrowLeft':
+            tank.direction = -90;
+            break;
+
+        case 'ArrowRight':
+
+            tank.direction = 90;
+            break;
+
+        case 'ArrowUp':
+
+            tank.direction = 0;
+            break;
+
+        case 'ArrowDown':
+            tank.direction = 180;
+            break;
+
+        default:
+
+    }
     event.preventDefault();
+    event.stopPropagation();
 });
 
 document.addEventListener('click', function () {
@@ -767,50 +810,8 @@ window.addEventListener('load', () => {
 });
 //Isto, drugacije napisano
 
-window.addEventListener('keyup', (event) => {
-    switch (event.key) {
-        case 'ArrowLeft':
-            tank.setSpeed(-10, 0);
-            break;
-        case 'ArrowRight':
-            tank.setSpeed(10, 0);
-            break;
-        case 'ArrowUp':
-            tank.setSpeed(0, -10);
-            break;
-        case 'ArrowDown':
-            tank.setSpeed(0, 10);
-            break;
-        default:
-    }
-});
 //funkcija rotacije
 
-
-window.addEventListener('keyup', function (event) {
-    switch (event.key) {
-        case 'ArrowLeft':
-            tank.direction = -90;
-            break;
-
-        case 'ArrowRight':
-
-            tank.direction = 90;
-            break;
-
-        case 'ArrowUp':
-
-            tank.direction = 0;
-            break;
-
-        case 'ArrowDown':
-            tank.direction = 180;
-            break;
-
-        default:
-
-    }
-});
 
 function tankBlock(tank) {
 
@@ -935,7 +936,7 @@ function tankGotHit(tank) {
 function brickGotHit(brick) {
     for (var i = 0; i < sprites.length; i++) {
         var sprite = sprites[i];
-        if (sprite == brick == metal) {
+        if (sprite == brick) {
             continue;
         }
         if (!(sprite.isCarBullet || sprite.isBullet)) {
