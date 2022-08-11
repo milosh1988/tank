@@ -59,6 +59,8 @@ yourWater2.src = 'Pictures/water6.png';
 var yourLoad = new Image();
 yourLoad.src = 'Pictures/load.png';
 
+let playing = true;
+
 var sprites = [];
 
 
@@ -742,6 +744,7 @@ document.addEventListener('keyup', function (event) {
         default:
 
     }
+    keyup(event)
     event.preventDefault();
     event.stopPropagation();
 });
@@ -756,13 +759,29 @@ function loop() {
     render();
     requestAnimationFrame(loop);
 }
+function pauseGame() {
+    if (!playing) {
+        playing = true;
+    } else if (playing) {
+        playing = false;
+    }
+    console.log(playing)
+
+}
+
+function keyup(e) {
+    if (e.keyCode == 80) pauseGame()
+}
+
 
 function update() {
     // Here we update all the sprites
     // THe reverse for loop is faster
-    for (var ix = 0; ix < sprites.length; ix++) {
-        var sprite = sprites[ix];
-        sprite.update();
+    if (playing === true) {
+        for (var ix = 0; ix < sprites.length; ix++) {
+            var sprite = sprites[ix];
+            sprite.update();
+        }
     }
 }
 
@@ -776,6 +795,7 @@ function render() {
             sprites[ix].render();
         }
     }
+
     for (var ix = 0; ix < sprites.length; ix++) {
         var sprite = sprites[ix];
         if (sprite.isCarBullet || sprite.isBullet) {
