@@ -60,6 +60,8 @@ var yourLoad = new Image();
 yourLoad.src = 'Pictures/load.png';
 
 let playing = true;
+let gameStarted = false;
+var changeInCar = 10;
 
 var sprites = [];
 
@@ -681,8 +683,15 @@ var newCar = function () {
 
 }
 
-setInterval(newCar, 3000)
+//setInterval(newCar, 3000)
+function addCar() {
 
+    changeInCar--
+    if (changeInCar < 0) {
+        changeInCar = 180;
+        newCar()
+    }
+}
 
 function createBullet() {
     if (!tank.alive) {
@@ -754,19 +763,14 @@ document.addEventListener('click', function () {
 });
 
 function loop() {
-
-    update();
-    render();
+    if (gameStarted) {
+        update();
+        render();
+    }
     requestAnimationFrame(loop);
 }
 function pauseGame() {
-    if (!playing) {
-        playing = true;
-    } else if (playing) {
-        playing = false;
-    }
-    console.log(playing)
-
+    playing = !playing
 }
 
 function keyup(e) {
@@ -778,6 +782,7 @@ function update() {
     // Here we update all the sprites
     // THe reverse for loop is faster
     if (playing === true) {
+        addCar()
         for (var ix = 0; ix < sprites.length; ix++) {
             var sprite = sprites[ix];
             sprite.update();
@@ -1020,7 +1025,7 @@ function startGame() {
     startDiv.style.display = "none";
     gameCanvas.style.display = "block";
     gameOver.style.display = "none";
-    start();
+    gameStarted = true
 }
 function gameOver() {
     let startDiv = document.getElementById("start");
@@ -1029,12 +1034,7 @@ function gameOver() {
     startDiv.style.display = "none";
     gameCanvas.style.display = "none";
     gameOver.style.display = "block";
-
-    car.init.reset();
-    tank.init.reset();
-    player2.reset();
-
-    clearInterval(sprites);
+    gameStarted = false
 }
 function launchIfReady() {
     resourcesToLoad--;
