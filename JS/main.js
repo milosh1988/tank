@@ -150,6 +150,31 @@ function initialiseGame() {
     initialiseMap(myMap)
     gameStarted = true;
 }
+function initialiseGameLevel() {
+    let startDiv = document.getElementById("start");
+    let gameCanvas = document.getElementById("canvas");
+    let gameOver = document.getElementById("game-over");
+    let nextLevel = document.getElementById("next-level");
+    startDiv.style.display = "none";
+    gameCanvas.style.display = "block";
+    gameOver.style.display = "none";
+    nextLevel.style.display = "none";
+
+    enemies = 2;
+    yourEnemies.innerHTML = enemies
+    enemiesBoard = 0;
+    yourEnemiesBoard.innerHTML = enemiesBoard
+
+    playing = true;
+
+    sprites = [];
+    loads = [];
+    tank = new ClassTank();
+    tank.init();
+    myMap = maps[level % maps.length]
+    initialiseMap(myMap)
+    gameStarted = true;
+}
 
 function initialiseMap(map) {
     map.forEach(function (e, iy) {
