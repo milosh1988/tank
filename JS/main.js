@@ -115,7 +115,7 @@ function initialiseGame() {
     yourScore.innerHTML = score
     life = 1;
     yourLife.innerHTML = life
-    enemies = 20;
+    enemies = 1;
     yourEnemies.innerHTML = enemies
     enemiesBoard = 0;
     yourEnemiesBoard.innerHTML = enemiesBoard
@@ -158,6 +158,13 @@ function initialiseMap() {
     )
 }
 
+function nextLevel() {
+    if (enemiesBoard > 0 || enemies > 0) {
+        return
+    }
+    launchNextLevel()
+
+}
 
 function newCar() {
     if (enemies <= 0) {
@@ -390,9 +397,9 @@ function carGotHit(car) {
         if (hitSomething(sprite, car)) {
             sprite.alive = false;
             playAudioDeth(car)
-            addScore()
             enemiesBoard--
             enemyShowLeft()
+            addScore()
             var myBoom = new ClassBoom(car)
             sprites.push(myBoom)
             return true;
@@ -403,6 +410,7 @@ function carGotHit(car) {
 function addScore() {
     score = score + 1
     yourScore.innerHTML = score
+    nextLevel()
 }
 
 function lostLifes() {
@@ -510,9 +518,11 @@ function startGame() {
     let startDiv = document.getElementById("start");
     let gameCanvas = document.getElementById("canvas");
     let gameOver = document.getElementById("game-over");
+    let nextLevel = document.getElementById("next-level");
     startDiv.style.display = "none";
     gameCanvas.style.display = "block";
     gameOver.style.display = "none";
+    nextLevel.style.display = "none";
     initialiseGame();
 }
 
@@ -520,19 +530,22 @@ function gameOver() {
     let startDiv = document.getElementById("start");
     let gameCanvas = document.getElementById("canvas");
     let gameOver = document.getElementById("game-over");
+    let nextLevel = document.getElementById("next-level");
     startDiv.style.display = "none";
     gameCanvas.style.display = "none";
     gameOver.style.display = "block";
+    nextLevel.style.display = "none";
     gameStarted = false;
 }
-function launchIfReady() {
-    resourcesToLoad--;
-    if (resourcesToLoad == 0) {
-        let startDiv = document.getElementById("start");
-        let gameCanvas = document.getElementById("canvas");
-        let gameOver = document.getElementById("game-over");
-        startDiv.style.display = "block";
-        gameCanvas.style.display = "none";
-        gameOver.style.display = "none";
-    }
+function nextLevel() {
+
+    let startDiv = document.getElementById("start");
+    let gameCanvas = document.getElementById("canvas");
+    let gameOver = document.getElementById("game-over");
+    let nextLevel = document.getElementById("next-level");
+    startDiv.style.display = "none";
+    gameCanvas.style.display = "none";
+    gameOver.style.display = "none";
+    nextLevel.style.display = "block";
+
 }

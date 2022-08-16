@@ -89,26 +89,26 @@ align-items: center;
   
 body {
   color: #ffffff;
-  background-color:#1bafdb;
+  background-color:#ffffff;
 }
 
-#start, #game-over {
+#start, #game-over, #next-level{
   font-family:Arial, Helvetica, sans-serif;
   color: #ffffff;
   padding: 20px;
   position: fixed;
-  top:70%;
+  top:50%;
   left:47%;
   margin-top: -100px;
   margin-left: -100px;
   height:200px;
-  width:250px;
+  width:300px;
   text-align: center;
 }
 
-#start a, #game-over a {
-  border: 3px solid #ffffff;
-  color: #ffffff;
+#start a, #game-over a, #next-level a {
+  border: 3px solid #358aeb;
+  color: #2b0a86;
   text-decoration: none;
   padding: 10px;
   border-radius: 15px;
@@ -120,4 +120,4 @@ body {
   display: inline-block;
 }
 
-#start a:hover, #game-over a:hover { background-color: #ffffff; color: #1bafdb; }
+#start a:hover, #game-over a:hover,#next-level a:hover { background-color: #57ddb3; color: #0da2c0; }
