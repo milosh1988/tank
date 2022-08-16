@@ -90,15 +90,35 @@ var map =
     [1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1],
     [1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1],
     [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
     ]
+
+var map2 =
+    [
+        [0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1],
+        [1, 1, 1, 5, 5, 5, 5, 0, 0, 0, 0, 0, 1, 1],
+        [1, 0, 0, 0, 0, 4, 3, 3, 4, 0, 0, 0, 1, 1],
+        [1, 1, 1, 1, 0, 2, 3, 1, 2, 0, 1, 1, 1, 1],
+        [1, 1, 1, 1, 0, 2, 4, 2, 2, 0, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1],
+        [1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1],
+        [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [5, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1],
+        [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1],
+        [1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1]
+    ]
+
+var maps = [map, map2]
 
 function createElement(x, y, element) {
     (new element(x, y)).init()
 }
 
 
-
+var level = 0;
 var score;
 var life;
 var enemies;
@@ -126,11 +146,12 @@ function initialiseGame() {
     loads = [];
     tank = new ClassTank();
     tank.init();
-    initialiseMap()
+    myMap = maps[level % maps.length]
+    initialiseMap(myMap)
     gameStarted = true;
 }
 
-function initialiseMap() {
+function initialiseMap(map) {
     map.forEach(function (e, iy) {
         e.forEach(function (ee, ix) {
             if (ee == 0) {
@@ -537,8 +558,8 @@ function gameOver() {
     nextLevel.style.display = "none";
     gameStarted = false;
 }
-function nextLevel() {
 
+function launchNextLevel() {
     let startDiv = document.getElementById("start");
     let gameCanvas = document.getElementById("canvas");
     let gameOver = document.getElementById("game-over");
@@ -547,5 +568,5 @@ function nextLevel() {
     gameCanvas.style.display = "none";
     gameOver.style.display = "none";
     nextLevel.style.display = "block";
-
+    level++
 }
