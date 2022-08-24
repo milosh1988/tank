@@ -589,9 +589,14 @@ function launchNextLevel() {
     let gameCanvas = document.getElementById("canvas");
     let gameOver = document.getElementById("game-over");
     let nextLevel = document.getElementById("next-level");
+    let nextLevelLabel = document.getElementById("next-level-label");
+
     startDiv.style.display = "none";
     gameCanvas.style.display = "none";
     gameOver.style.display = "none";
     nextLevel.style.display = "block";
     level++
+    nextLevelLabel.innerHTML = "Level " + level + " finished"
 }
+
+
