@@ -525,3 +525,6 @@ function ClassBullet() {
         }
     };
 }
+
+var pera = { bojOciju: "Braon" }
+console.log(pera, new ClassTank())

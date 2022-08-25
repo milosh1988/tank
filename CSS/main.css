@@ -120,4 +120,11 @@ body {
   display: inline-block;
 }
 
-#start a:hover, #game-over a:hover,#next-level a:hover { background-color: #57ddb3; color: #0da2c0; }
+#start a:hover, #game-over a:hover,#next-level a:hover { background-color: #a6c4dd; color: #110ef7; 
+  
+    cursor: pointer;
+    box-shadow: 0 0.4rem 1.4rem 0 rgba(86, 185, 235, 0.5);
+    transform: translateY(-0.3rem);
+    transition: transform 200ms;
+  
+}

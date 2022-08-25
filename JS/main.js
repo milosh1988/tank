@@ -95,8 +95,8 @@ var map =
 
 var map2 =
     [
-        [0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1],
-        [1, 1, 1, 5, 5, 5, 5, 0, 0, 0, 0, 0, 1, 1],
+        [0, 1, 0, 5, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1],
+        [5, 5, 1, 5, 5, 5, 5, 0, 0, 0, 0, 0, 1, 1],
         [1, 0, 0, 0, 0, 4, 3, 3, 4, 0, 0, 0, 1, 1],
         [1, 1, 1, 1, 0, 2, 3, 1, 2, 0, 1, 1, 1, 1],
         [1, 1, 1, 1, 0, 2, 4, 2, 2, 0, 1, 1, 1, 1],
@@ -110,8 +110,50 @@ var map2 =
         [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1],
         [1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1]
     ]
+var map3 =
+    [
+        [0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1],
+        [1, 1, 1, 5, 5, 5, 5, 0, 0, 0, 0, 0, 1, 1],
+        [1, 0, 0, 0, 0, 4, 3, 3, 4, 0, 0, 0, 1, 1],
+        [1, 1, 5, 1, 0, 2, 3, 1, 2, 0, 1, 1, 1, 1],
+        [1, 1, 5, 1, 0, 2, 4, 2, 2, 0, 1, 1, 1, 1],
+        [1, 1, 5, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1],
+        [1, 1, 5, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1],
+        [1, 1, 5, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 5, 5, 5, 5, 5, 5, 5, 1, 4, 1, 1, 1],
+        [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [5, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 2, 0, 1, 1],
+        [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 3, 0, 1, 1],
+        [1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1]
+    ]
+var map4 =
+    [
+        [0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1],
+        [1, 1, 1, 5, 5, 5, 5, 0, 0, 0, 0, 0, 1, 1],
+        [1, 0, 0, 0, 0, 2, 3, 3, 2, 0, 0, 0, 1, 1],
+        [1, 1, 5, 1, 0, 2, 3, 1, 2, 0, 1, 1, 1, 1],
+        [1, 1, 5, 1, 0, 2, 2, 2, 2, 0, 1, 1, 1, 1],
+        [1, 1, 5, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1],
+        [1, 1, 5, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1],
+        [1, 1, 5, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1],
+        [1, 3, 3, 5, 1, 3, 5, 5, 5, 1, 2, 1, 1, 1],
+        [0, 3, 1, 1, 1, 1, 1, 1, 1, 5, 1, 1, 1, 1],
+        [1, 5, 1, 1, 1, 1, 1, 5, 1, 5, 1, 1, 1, 1],
+        [1, 3, 1, 1, 1, 0, 0, 5, 1, 5, 2, 0, 1, 1],
+        [1, 5, 5, 5, 5, 5, 5, 5, 1, 5, 3, 3, 3, 3],
+        [4, 1, 0, 0, 1, 1, 4, 1, 1, 1, 0, 1, 1, 4]
+    ]
 
-var maps = [map, map2]
+var maps = [map, map2, map3, map4]
+var enemies = 0
+var enemie = 5
+var enemie2 = 10
+var enemie3 = 15
+var enemie4 = 15
+
+var enemiseByLevel = [enemie, enemie2, enemie3, enemie4]
+
 
 function createElement(x, y, element) {
     (new element(x, y)).init()
@@ -121,7 +163,6 @@ function createElement(x, y, element) {
 var level = 0;
 var score;
 var life;
-var enemies;
 var enemiesBoard;
 
 var playing;
@@ -135,7 +176,6 @@ function initialiseGame() {
     yourScore.innerHTML = score
     life = 1;
     yourLife.innerHTML = life
-    enemies = 1;
     yourEnemies.innerHTML = enemies
     enemiesBoard = 0;
     yourEnemiesBoard.innerHTML = enemiesBoard
@@ -147,6 +187,7 @@ function initialiseGame() {
     tank = new ClassTank();
     tank.init();
     myMap = maps[level % maps.length]
+    enemies = enemiseByLevel[level % enemiseByLevel.length]
     initialiseMap(myMap)
     gameStarted = true;
 }
@@ -160,7 +201,7 @@ function initialiseGameLevel() {
     gameOver.style.display = "none";
     nextLevel.style.display = "none";
 
-    enemies = 2;
+
     yourEnemies.innerHTML = enemies
     enemiesBoard = 0;
     yourEnemiesBoard.innerHTML = enemiesBoard
@@ -172,6 +213,7 @@ function initialiseGameLevel() {
     tank = new ClassTank();
     tank.init();
     myMap = maps[level % maps.length]
+    enemies = enemiseByLevel[level % enemiseByLevel.length]
     initialiseMap(myMap)
     gameStarted = true;
 }
