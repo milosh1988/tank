@@ -525,6 +525,6 @@ function ClassBullet() {
         }
     };
 }
-
+//Novi objekat
 var pera = { bojOciju: "Braon" }
 console.log(pera, new ClassTank())
