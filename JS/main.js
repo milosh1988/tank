@@ -337,6 +337,7 @@ function nextLevel() {
     if (enemiesBoard > 0 || enemies > 0) {
         return
     }
+    playing = false;
     launchNextLevel()
 
 }
@@ -368,6 +369,9 @@ function createBullet() {
         return
     }
     var bullet = new ClassBullet();
+    if (playing === !true) {
+        return
+    }
     bullet.init();
 
 }
@@ -384,6 +388,9 @@ window.addEventListener('keydown', (e) => {
 document.addEventListener('keyup', function (event) {
     // If space bar is pressed
     if (event.key == " ") {
+        if (enemiesBoard <= 0) {
+            return
+        }
         createBullet();
     }
     switch (event.key) {
@@ -429,6 +436,9 @@ document.addEventListener('keyup', function (event) {
 });
 
 document.addEventListener('click', function () {
+    if (enemiesBoard <= 0) {
+        return
+    }
     createBullet();
 });
 
@@ -726,6 +736,8 @@ function launchNextLevel() {
     nextLevel.style.display = "block";
     level++
     nextLevelLabel.innerHTML = "Level " + level + " finished"
+
+
 }
 
 
