@@ -378,8 +378,9 @@ function ClassTank() {
 
 
             if (life <= 0) {
-                gameOver()
+                createSaveScore()
                 return
+
 
 
             }
@@ -528,3 +529,4 @@ function ClassBullet() {
 //Novi objekat
 var pera = { bojOciju: "Braon" }
 console.log(pera, new ClassTank())
+

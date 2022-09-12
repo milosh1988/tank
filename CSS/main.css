@@ -88,8 +88,8 @@ align-items: center;
 }
   
 body {
-  color: #ffffff;
-  background-color:#ffffff;
+  color: #669ad6;
+  background-color:#ecf5ff;
 }
 
 #start, #game-over, #next-level{
@@ -128,3 +128,4 @@ body {
     transition: transform 200ms;
   
 }
+

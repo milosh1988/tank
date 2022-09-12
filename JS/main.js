@@ -261,7 +261,7 @@ var loads;
 function initialiseGame() {
     score = 0;
     yourScore.innerHTML = score
-    life = 3;
+    life = 1;
     yourLife.innerHTML = life
     yourEnemies.innerHTML = enemies
     enemiesBoard = 0;
@@ -596,6 +596,7 @@ function addScore() {
     score = score + 1
     yourScore.innerHTML = score
     nextLevel()
+    addScoreStorage()
 }
 
 function lostLifes() {
@@ -709,6 +710,7 @@ function startGame() {
     gameOver.style.display = "none";
     nextLevel.style.display = "none";
     initialiseGame();
+    console.log('startGame')
 }
 
 function gameOver() {
@@ -739,5 +741,16 @@ function launchNextLevel() {
 
 
 }
+function playAgin() {
+    window.location = 'index.html';
+    startGame();
 
+}
 
+function addScoreStorage() {
+    localStorage.setItem('mostRecentScore', score);
+}
+
+function createSaveScore() {
+    window.location = 'save score.html';
+}
