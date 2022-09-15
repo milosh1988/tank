@@ -367,8 +367,6 @@ function ClassTank() {
         var oldy = this.y;
         this.x += this.sx;
         this.y += this.sy;
-        this.sx = 0;
-        this.sy = 0;
         if (tankBlock(this)) {
             this.x = oldx;
             this.y = oldy;

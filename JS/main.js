@@ -354,6 +354,7 @@ function newCar() {
 }
 
 //setInterval(newCar, 3000)
+
 var changeInCar = 10;
 function addCar() {
 
@@ -380,33 +381,30 @@ function createCarBullet(car) {
     bulletCar.init();
 
 }
-window.addEventListener('keydown', (e) => {
-
-    e.preventDefault();
-
-});
-document.addEventListener('keyup', function (event) {
-    // If space bar is pressed
+window.addEventListener('keydown', (event) => {
     if (event.key == " ") {
         if (enemiesBoard <= 0) {
             return
         }
         createBullet();
     }
+
     switch (event.key) {
         case 'ArrowLeft':
-            tank.setSpeed(-10, 0);
+            tank.setSpeed(-1, 0);
             break;
+
         case 'ArrowRight':
-            tank.setSpeed(10, 0);
+            tank.setSpeed(1, 0);
             break;
         case 'ArrowUp':
-            tank.setSpeed(0, -10);
+            tank.setSpeed(0, -1);
             break;
         case 'ArrowDown':
-            tank.setSpeed(0, 10);
+            tank.setSpeed(0, 1);
             break;
         default:
+
     }
     switch (event.key) {
         case 'ArrowLeft':
@@ -430,7 +428,26 @@ document.addEventListener('keyup', function (event) {
         default:
 
     }
-    keyup(event)
+
+    e.preventDefault();
+    e.stopPropagation();
+
+});
+document.addEventListener('keyup', function (event) {
+    // If space bar is pressed
+
+    if (event.keyCode == 80) pauseGame()
+
+    switch (event.key) {
+        case 'ArrowLeft':
+        case 'ArrowRight':
+        case 'ArrowUp':
+        case 'ArrowDown':
+            tank.setSpeed(0, 0);
+            break;
+        default:
+    }
+
     event.preventDefault();
     event.stopPropagation();
 });
@@ -453,9 +470,7 @@ function pauseGame() {
     playing = !playing
 }
 
-function keyup(e) {
-    if (e.keyCode == 80) pauseGame()
-}
+
 
 
 function update() {
