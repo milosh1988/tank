@@ -66,6 +66,48 @@ function ClassWater(x, y) {
     }
 }
 
+function ClassDart() {
+    this.x = 100;
+    this.y = 600;
+    this.width = 50;
+    this.height = 50;
+    this.alive = true;
+    this.isDart = true;
+    this.init = function () {
+        // Update position
+        sprites.push(this);
+
+    };
+    this.render = function () {
+        if (this.alive) {
+            ctx.save();
+            ctx.drawImage(yourDartRight, this.x, this.y, this.width, this.height);
+            ctx.drawImage(yourDartLeft, this.x - 100, this.y, this.width, this.height);
+            ctx.drawImage(yourDartDown, this.x - 50, this.y + 50, this.width, this.height);
+            ctx.drawImage(yourDartUp, this.x - 50, this.y - 50, this.width, this.height);
+            ctx.restore();
+          
+           
+        }
+        this.clicket= function() {
+            var d = dist(mouseX,mouseY, this.width, this.height);
+            if (d < 25) {
+                console.log('to je to')
+            }
+        
+
+        }
+       
+    }
+    this.update = function () {
+        
+
+        
+    }
+   
+}
+
+
 function ClassBrickCrack(brick) {
     this.x = brick.x
     this.y = brick.y
@@ -163,6 +205,8 @@ function ClassMetal(x1, y1) {
     };
 
 }
+
+
 
 function ClassBush(x2, y2) {
     this.x = x2;

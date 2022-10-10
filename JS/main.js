@@ -51,6 +51,16 @@ yourWater2.src = 'Pictures/water6.png';
 var yourLoad = new Image();
 yourLoad.src = 'Pictures/load.png';
 
+var yourDartRight = new Image();
+yourDartRight.src = 'Pictures/right.png';
+var yourDartDown = new Image();
+yourDartDown.src = 'Pictures/down.png';
+var yourDartLeft = new Image();
+yourDartLeft.src = 'Pictures/left.png';
+var yourDartUp = new Image();
+yourDartUp.src = 'Pictures/up.png';
+
+
 function playAudio() {
     var audio = new Audio("Sound/shutting.mp3");
     audio.play();
@@ -277,6 +287,8 @@ function initialiseGame() {
     enemies = enemiseByLevel[level % enemiseByLevel.length]
     initialiseMap(myMap)
     gameStarted = true;
+    dartRight = new ClassDart;
+    dartRight.init();
 }
 function initialiseGameLevel() {
     let startDiv = document.getElementById("start");
@@ -303,6 +315,8 @@ function initialiseGameLevel() {
     enemies = enemiseByLevel[level % enemiseByLevel.length]
     initialiseMap(myMap)
     gameStarted = true;
+    dartRight = new ClassDart;
+    dartRight.init();
 }
 
 function initialiseMap(map) {
@@ -514,7 +528,7 @@ function render() {
     }
     for (var ix = 0; ix < sprites.length; ix++) {
         var sprite = sprites[ix];
-        if (sprite.isBush || sprite.isBoom) {
+        if (sprite.isBush || sprite.isBoom || sprite.isDart) {
             sprites[ix].render();
         }
     }
