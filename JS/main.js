@@ -396,11 +396,12 @@ function createCarBullet(car) {
     bulletCar.init();
 
 }
-window.addEventListener('mousedown', (event) => {   
-    var rect = event.target.getBoundingClientRect();
-    var x = event.clientX - rect.left; //x position within the element.
-    var y = event.clientY - rect.top;  //y position within the element.
+ var phoneControl = (x, y) => {   
+    if (!dartRight){    
+    return;
+    } 
     var dartRes = dartRight.click(x,y)
+
 
     if(dartRes){
         switch (dartRes) {
@@ -428,21 +429,44 @@ window.addEventListener('mousedown', (event) => {
                 
         }
         event.stopPropagation()
-        event.preventDefault()
         return;
     }
-})
+}
 
-window.addEventListener('mouseup', (event) => {
-        tank.setSpeed(0, 0);
-        event.stopPropagation()
-        event.preventDefault()
-        
-    }
-    
-    
+window.addEventListener('mousedown',(event)=>{ 
+    var rect = event.target.getBoundingClientRect();
+var x = event.clientX - rect.left; //x position within the element.
+var y = event.clientY - rect.top;  //y position within the element.
+phoneControl(x, y)
+}
 )
 
+
+
+window.addEventListener('mouseup', (event) => {
+    if (!tank){
+        return;
+    }    
+    
+    tank.setSpeed(0, 0);
+        event.stopPropagation()
+        event.preventDefault()
+      })
+
+window.addEventListener('touchstart', (event) => {
+    var rect = event.target.getBoundingClientRect();
+    var x = event.touches[0].clientX - rect.left; //x position within the element.
+    var y = event.touches[0].clientY - rect.top;  //y position within the element.
+    phoneControl(x, y)
+})
+window.addEventListener('touchend', (event) => {
+    if (!tank){
+        return;
+    } 
+    tank.setSpeed(0, 0);
+    //event.stopPropagation()
+    //event.preventDefault()
+  })
 
 window.addEventListener('keydown', (event) => {
 
@@ -494,8 +518,8 @@ window.addEventListener('keydown', (event) => {
 
     }
 
-    e.preventDefault();
-    e.stopPropagation();
+    event.preventDefault();
+    event.stopPropagation();
 
 });
 document.addEventListener('keyup', function (event) {
@@ -517,16 +541,22 @@ document.addEventListener('keyup', function (event) {
     event.stopPropagation();
 });
 
-document.addEventListener('click', function (event) {
+window.addEventListener('click', function (event) {
+    if (!dartRight){    
+        return;
+        } 
+        console.log(event)
     var rect = event.target.getBoundingClientRect();
     var x = event.clientX - rect.left; //x position within the element.
     var y = event.clientY - rect.top;  //y position within the element.
     var dartRes = dartRight.click(x,y)
+    console.log(x,y,dartRes, enemiesBoard)
     if (dartRes){  
      return
     }
     if (enemiesBoard <= 0) {
         return
+        
     }
     createBullet();
 });
