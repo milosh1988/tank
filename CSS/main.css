@@ -128,4 +128,39 @@ body {
     transition: transform 200ms;
   
 }
+#header {
+
+  margin: 0;
+
+  padding: 0;
+
+  background-color: #36420a;
+
+}
+
+
+
+.noselect {
+
+  -webkit-touch-callout: none;
+
+  -webkit-user-select: none;
+
+  -khtml-user-select: none;
+
+  -moz-user-select: none;
+
+  -ms-user-select: none;
+
+  user-select: none;
+
+  -webkit-transition: margin .1s linear, height .1s linear;
+
+  -moz-transition: margin .1s linear;
+
+  -o-transition: margin .1s linear;
+
+  transition: margin .1s linear;
+
+}
 
