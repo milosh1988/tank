@@ -67,8 +67,8 @@ function ClassWater(x, y) {
 }
 
 function ClassDart() {
-    this.x = 100;
-    this.y = 600;
+    this.x = 50;
+    this.y = 550;
     this.width = 50;
     this.height = 50;
     this.alive = true;
@@ -81,22 +81,33 @@ function ClassDart() {
     this.render = function () {
         if (this.alive) {
             ctx.save();
-            ctx.drawImage(yourDartRight, this.x, this.y, this.width, this.height);
-            ctx.drawImage(yourDartLeft, this.x - 100, this.y, this.width, this.height);
-            ctx.drawImage(yourDartDown, this.x - 50, this.y + 50, this.width, this.height);
-            ctx.drawImage(yourDartUp, this.x - 50, this.y - 50, this.width, this.height);
+            ctx.drawImage(yourDartRight, this.x + 100, this.y + 50, this.width, this.height);
+            ctx.drawImage(yourDartLeft, this.x, this.y + 50, this.width, this.height);
+            ctx.drawImage(yourDartDown, this.x + 50, this.y + 100, this.width, this.height);
+            ctx.drawImage(yourDartUp, this.x + 50, this.y, this.width, this.height);
             ctx.restore();
           
            
-        }
-        this.clicket= function() {
-            var d = dist(mouseX,mouseY, this.width, this.height);
-            if (d < 25) {
-                console.log('to je to')
+      }
+    }
+        this.click= function(mosueX,mouseY) {
+            if(mosueX>this.x && mosueX<this.x+50 && mouseY > this.y+50 && mouseY < this.y + 100 ){
+                return 'left'
             }
+            if(mosueX>this.x +100 && mosueX<this.x+ 150 && mouseY > this.y+50 && mouseY < this.y + 100 ){
+                return 'right'
+            }
+            if(mosueX>this.x +50 && mosueX<this.x+ 100 && mouseY > this.y + 100 && mouseY < this.y + 150 ){
+                return 'down'
+            }
+            if(mosueX>this.x +50 && mosueX<this.x + 100 && mouseY > this.y && mouseY < this.y + 50 ){
+                return 'up'
+            }
+   
+   
+            return ''
         
-
-        }
+       
        
     }
     this.update = function () {

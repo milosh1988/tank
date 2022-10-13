@@ -53,6 +53,7 @@ yourLoad.src = 'Pictures/load.png';
 
 var yourDartRight = new Image();
 yourDartRight.src = 'Pictures/right.png';
+var dartRight = null;
 var yourDartDown = new Image();
 yourDartDown.src = 'Pictures/down.png';
 var yourDartLeft = new Image();
@@ -287,7 +288,7 @@ function initialiseGame() {
     enemies = enemiseByLevel[level % enemiseByLevel.length]
     initialiseMap(myMap)
     gameStarted = true;
-    dartRight = new ClassDart;
+    dartRight = new ClassDart();
     dartRight.init();
 }
 function initialiseGameLevel() {
@@ -395,7 +396,56 @@ function createCarBullet(car) {
     bulletCar.init();
 
 }
+window.addEventListener('mousedown', (event) => {   
+    var rect = event.target.getBoundingClientRect();
+    var x = event.clientX - rect.left; //x position within the element.
+    var y = event.clientY - rect.top;  //y position within the element.
+    var dartRes = dartRight.click(x,y)
+
+    if(dartRes){
+        switch (dartRes) {
+            case 'left':
+                tank.setSpeed(-1, 0);
+                tank.direction = -90;
+                break;
+            case 'right':
+                    tank.setSpeed(1, 0);
+                    tank.direction = 90;
+                    break;
+             case 'down':
+                     tank.setSpeed(0, 1);
+                     tank.direction = 180;
+                     break;
+            case 'up':
+                    tank.setSpeed(0, -1);
+                    tank.direction = 0;
+                    break;
+               
+        
+            default:
+                break;
+                
+                
+        }
+        event.stopPropagation()
+        event.preventDefault()
+        return;
+    }
+})
+
+window.addEventListener('mouseup', (event) => {
+        tank.setSpeed(0, 0);
+        event.stopPropagation()
+        event.preventDefault()
+        
+    }
+    
+    
+)
+
+
 window.addEventListener('keydown', (event) => {
+
     if (event.key == " ") {
         if (enemiesBoard <= 0) {
             return
@@ -406,6 +456,7 @@ window.addEventListener('keydown', (event) => {
     switch (event.key) {
         case 'ArrowLeft':
             tank.setSpeed(-1, 0);
+            
             break;
 
         case 'ArrowRight':
@@ -466,7 +517,14 @@ document.addEventListener('keyup', function (event) {
     event.stopPropagation();
 });
 
-document.addEventListener('click', function () {
+document.addEventListener('click', function (event) {
+    var rect = event.target.getBoundingClientRect();
+    var x = event.clientX - rect.left; //x position within the element.
+    var y = event.clientY - rect.top;  //y position within the element.
+    var dartRes = dartRight.click(x,y)
+    if (dartRes){  
+     return
+    }
     if (enemiesBoard <= 0) {
         return
     }
