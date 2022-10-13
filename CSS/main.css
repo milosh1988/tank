@@ -1,68 +1,27 @@
 h1 {  
     text-align: center;  
-     
-    font-size: 70px;
+    font-size: 50px;
     background-color: rgb(38, 152, 198);  
-    color: white;  
+    color: rgb(245, 245, 245);  
     border-style: dotted;
-    
     }  
     
 canvas {
   display: flex;
 justify-content: center;
 align-items: center;
-  border: 1px solid black;;
+  border: 3px solid black;;
   margin: auto;
 }
 
-
-.score {
-   
-  margin: auto;
-   background-color: #78abb5;
-   border: 1px solid rgb(136, 172, 193);
-   opacity: 0.9;
-   font-weight: bold;
-   width:fit-content;
-;
-  
-}
-
-.life {
-   margin: auto;
-   background-color: #78abb5;
-   border: 1px solid rgb(136, 172, 193);
-   opacity: 0.9;
-   font-weight: bold;
-   color: #000000;
-   width:fit-content;
-
-  
- }
-
-
-.enemies {
-  margin: auto;
-  background-color: #78abb5;
+ .enemiesBoard, .enemies, .life, .score{
   border: 1px solid rgb(136, 172, 193);
   opacity: 0.9;
   font-weight: bold;
   color: #000000;
-  width:fit-content;
-  
-  
- }
-
- .enemiesBoard{
-  margin: auto;
-  background-color: #78abb5;
-  border: 1px solid rgb(136, 172, 193);
-  opacity: 0.9;
-  font-weight: bold;
-  color: #000000;
-  width:fit-content;
-  
+  background: rgb(120, 207, 157);
+  padding: 10px;
+  height: 10px;
 }
 
 .pepa {
@@ -72,24 +31,37 @@ align-items: center;
 
 
 }
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
 
 .tick {
   border: 1px solid rgb(136, 172, 193);
   opacity: 0.9;
   font-weight: bold;
   color: #000000;
- 
-  background: rgb(184, 218, 198);
-
-  
-  
+  background: rgb(120, 207, 157);
+  float: left;
+  width: 50%;
+  padding: 10px;
+  height: 10px;
   
   
 }
+.bottom {
+  border: 1px solid rgb(136, 172, 193);
+  opacity: 0.9;
+  font-weight: bold;
+  color: #000000;
+  background: rgb(120, 207, 157);
+  text-align: center;
+}
   
 body {
-  color: #669ad6;
-  background-color:#ecf5ff;
+  color: #020a13;
+  background-color:#e3eefa;
 }
 
 #start, #game-over, #next-level{
@@ -103,7 +75,7 @@ body {
   margin-left: -100px;
   height:200px;
   width:300px;
-  text-align: center;
+  text-align: left;
 }
 
 #start a, #game-over a, #next-level a {
@@ -115,7 +87,7 @@ body {
   cursor: pointer;
   display: block;
   width: 200px;
-  text-align: center;
+  text-align: left;
   font-size:2em;
   display: inline-block;
 }
@@ -134,7 +106,7 @@ body {
 
   padding: 0;
 
-  background-color: #36420a;
+  background-color: #bbcc7e;
 
 }
 
