@@ -62,6 +62,10 @@ var yourDartUp = new Image();
 yourDartUp.src = 'Pictures/up.png';
 
 
+var canvas = document.getElementById('cavnas');
+canvas.onselectstart = function () { return false; }
+
+
 function playAudio() {
     var audio = new Audio("Sound/shutting.mp3");
     audio.play();
