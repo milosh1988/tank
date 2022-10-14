@@ -61,11 +61,6 @@ yourDartLeft.src = 'Pictures/left.png';
 var yourDartUp = new Image();
 yourDartUp.src = 'Pictures/up.png';
 
-
-var canvas = document.getElementById('cavnas');
-canvas.onselectstart = function () { return false; }
-
-
 function playAudio() {
     var audio = new Audio("Sound/shutting.mp3");
     audio.play();
@@ -276,7 +271,7 @@ var loads;
 function initialiseGame() {
     score = 0;
     yourScore.innerHTML = score
-    life = 1;
+    life = 3;
     yourLife.innerHTML = life
     yourEnemies.innerHTML = enemies
     enemiesBoard = 0;
